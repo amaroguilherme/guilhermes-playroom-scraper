@@ -1,0 +1,13 @@
+# Ignore virtualenv environments.
+
+.venv*/
+venv*/
+
+# Ignore settings for various IDEs.
+
+.idea/
+.project/
+.pydevproject/
+nbproject/
+.vscode/
+*.code-workspace
