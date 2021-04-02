@@ -34,9 +34,9 @@ class IGNScraper:
 
         if ' '.join(link.get("class")) != "gallery STORY" and "card VIDEO" not in ' '.join(link.get("class")):
           if target not in link.find("a").get("href"):
-            article["content"] = get_article_content(f'{target}{link.find("a").get("href")}')
+            article["content"] = self.get_article_content(f'{target}{link.find("a").get("href")}')
           else:
-            article["content"] = get_article_content(link.find("a").get("href"))
+            article["content"] = self.get_article_content(link.find("a").get("href"))
         news.append(article)
 
     return news
