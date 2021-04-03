@@ -1,8 +1,10 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 from omelete_scraper import OmeleteScraper
 from ign_scraper import IGNScraper
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"*": {"origins": "*"}})
 
 @app.route('/news')
 def get_news():
