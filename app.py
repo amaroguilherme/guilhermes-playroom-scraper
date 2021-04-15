@@ -9,19 +9,24 @@ app = Flask(__name__)
 cors = CORS(app, resources={r"*": {"origins": "*"}})
 cache.init_app(app)
 
-@app.route('/news')
-@cache.cached(timeout=21600, key_prefix='news')
-def get_news():
+@app.route('/omelete')
+@cache.cached(timeout=21600, key_prefix='omelete')
+def get_omelete():
 
   omelete = OmeleteScraper()
-  gamespot = GamespotScraper()
 
   omelete_news = omelete.get_omelete_news()
+
+  return jsonify({'news': omelete_news}), 200
+
+@app.route('/gamespot')
+@cache.cached(timeout=21600, key_prefix='gamespot')
+def get_gamespot():
+
+  gamespot = GamespotScraper()
+
   gamespot_news = gamespot.get_gamespot_news()
 
-  news = omelete_news + gamespot_news
-  random.shuffle(news)
-
-  return jsonify({'news': news}), 200
+  return jsonify({'news': gamespot_news}), 200
 
 app.run()
